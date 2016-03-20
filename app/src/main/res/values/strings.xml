@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OffsetBall</string>
+    <string name="startGameButtonCaption">Start game</string>
 </resources>
