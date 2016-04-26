@@ -12,9 +12,13 @@ import android.view.ViewGroup;
  */
 public class GameFragment extends Fragment {
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.game_fragment,container);
+
+    private View root;
+
+
+    public View onCreateView (LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
+    {
+        root=inflater.inflate(R.layout.game_fragment,container,false);
+        return root;
     }
 }

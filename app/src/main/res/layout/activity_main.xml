@@ -7,16 +7,48 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.salmat_team.offsetball.MainActivity"
-    android:onClick="onButtonClick">
+    tools:context="com.salmat_team.offsetball.MainActivity">
 
-    <Button
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ExitButton"
+        android:text="Exit"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/OptionsButton"
+        android:text="Options"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/ExitButton"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TopButton"
+        android:text="Top"
+        android:layout_above="@id/OptionsButton"
+        android:layout_centerHorizontal="true"
+        />
+
+    <android.support.v7.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/startGameButtonCaption"
-        android:layout_marginTop="185dp"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/StartButton"
-        android:onClick="onButtonClick" />
+        android:layout_above="@id/TopButton"
+        />
+
+
+
+
+
+
 </RelativeLayout>
