@@ -16,19 +16,25 @@ import android.view.ViewGroup;
  */
 public class GameFragment extends Fragment {
 
-
     private View root;
+<<<<<<< Updated upstream
     DrawGame DG;
     SensorManager manager;
 
     @Override
+=======
+    private GameSpaceView gameView;
+
+>>>>>>> Stashed changes
     public View onCreateView (LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
     {
         root=inflater.inflate(R.layout.game_fragment,container,false);
+        gameView= (GameSpaceView) root.findViewById(R.id.gameSpaceView);
         return root;
     }
 
     @Override
+<<<<<<< Updated upstream
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setContentView(R.layout.game_fragment);
@@ -42,10 +48,19 @@ public class GameFragment extends Fragment {
     public void onResume() {
         super.onResume();
         manager.registerListener(listener, manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),SensorManager.SENSOR_DELAY_NORMAL);
+=======
+    public void onResume() {
+        super.onResume();
+        if(gameView!=null)
+        {
+            gameView.StartGame();
+        }
+>>>>>>> Stashed changes
     }
 
     @Override
     public void onPause() {
+<<<<<<< Updated upstream
         super.onPause();
         manager.unregisterListener(listener);
     }
@@ -65,4 +80,12 @@ public class GameFragment extends Fragment {
     };
 
 
+=======
+        super.onResume();
+        if(gameView!=null)
+        {
+            gameView.PauseGame();
+        }
+    }
+>>>>>>> Stashed changes
 }

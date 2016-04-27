@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< Updated upstream
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_game1"
@@ -21,3 +22,13 @@
         android:layout_height="match_parent"/>
 
 </RelativeLayout>
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_game1" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.salmat_team.offsetball.GameSpaceView
+        android:id="@+id/gameSpaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
+>>>>>>> Stashed changes
