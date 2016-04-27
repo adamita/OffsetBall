@@ -25,6 +25,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_layout);
         fragm = getIntent().getExtras().getString("fragment",null);
 
+        //loadFragment();
         //TextView TV=(TextView)findViewById(R.id.textView);
         //TV.setText(fragm);
 
@@ -41,11 +42,11 @@ public class GameActivity extends AppCompatActivity {
         switch (fragm) {
             case "Game":
                 ft.addToBackStack(GameFragment.class.getName());
-                ft.replace(R.id.fragment_game1, new GameFragment());
+                ft.add(R.id.fragment_game1, new GameFragment());
                 break;
             case "Options":
                 ft.addToBackStack(OptionsFragment.class.getName());
-                ft.replace(R.id.fragment_options, new OptionsFragment());
+                ft.add(R.id.fragment_options, new OptionsFragment());
                 break;
         }
 
