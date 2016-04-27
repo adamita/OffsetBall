@@ -18,14 +18,13 @@ public class Game {
     View view;
     Timer timer;
     TimerTask elapsed=new TimerElapsed();
-    int width;
 
     private Ball ball;
     private Floor floor;
 
     public Game(Context context, View view)
     {
-        width=view.getWidth();
+        int width=view.getWidth();
         this.view=view;
         ball=new Ball(context,width/2,0,30,2);
         floor=new Floor(context,width/2,400,100,25,3);
@@ -57,7 +56,7 @@ public class Game {
         }
 
         //if(){
-        floor.Move(-MotionSensor.getX(),width);
+        floor.Move(-MotionSensor.getX(),view.getWidth());
         /*}else{
         floor.Rotated(MotionSensor.getX());
         }*/

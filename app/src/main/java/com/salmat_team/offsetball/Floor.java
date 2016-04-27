@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.shapes.Shape;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 /**
  * Created by adamita on 2016. 04. 27..
@@ -53,6 +54,9 @@ public class Floor extends GameElement{
             x=(int)(((w/2)+(w-e))*((int)m));
         }*/
         setPosition(x,this.getY());
+        Log.i("Game","Floor e="+e);
+        Log.i("Game","Floor x="+x);
+        Log.i("Game","Floor m="+m);
     }
 
     public double getSubstance() {
