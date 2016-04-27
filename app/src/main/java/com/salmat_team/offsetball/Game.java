@@ -63,7 +63,7 @@ public class Game {
 
         if(falling)
         {
-            ball.Fall(1.5,MotionSensor.getX());
+            ball.Fall(1.5,-MotionSensor.getX());
         }
 
     }

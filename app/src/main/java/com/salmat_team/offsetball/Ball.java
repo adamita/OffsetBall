@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 /**
@@ -16,7 +17,6 @@ public class Ball extends GameElement{
     double gPower;
     int maxGPower;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public Ball(Context context, int x, int y, int size, int maxGPower)
     {
         super(context,x,y,size,size);
@@ -24,13 +24,7 @@ public class Ball extends GameElement{
         gPower=0;
         this.maxGPower=maxGPower;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            drawing=context.getDrawable(R.drawable.ball);
-        }
-        else
-        {
-            drawing=context.getResources().getDrawable(R.drawable.ball,null);
-        }
+        drawing=ContextCompat.getDrawable(context, R.drawable.ball);
     }
 
     public void Move(int x, int y)
