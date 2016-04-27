@@ -31,13 +31,13 @@ public class GameActivity extends AppCompatActivity {
         manager= (SensorManager) getSystemService(SENSOR_SERVICE);
         fragm = getIntent().getExtras().getString("fragment",null);
 
-<<<<<<< Updated upstream
-        //loadFragment();
-=======
-
->>>>>>> Stashed changes
-        //TextView TV=(TextView)findViewById(R.id.textView);
-        //TV.setText(fragm);
+//<<<<<<< Updated upstream
+//        //loadFragment();
+//=======
+//
+//>>>>>>> Stashed changes
+//        //TextView TV=(TextView)findViewById(R.id.textView);
+//        //TV.setText(fragm);
 
 
 
