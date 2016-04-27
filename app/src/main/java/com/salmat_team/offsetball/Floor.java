@@ -38,7 +38,7 @@ public class Floor extends GameElement{
         }
         else
         {
-            if(m<10)
+            if(m<-1)
             {
                 if(0<this.getX())
                 {x=this.getX()-20;}
