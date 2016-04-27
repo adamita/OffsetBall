@@ -39,7 +39,7 @@ public class GameSpaceView extends View {
 
     private void init(Context context)
     {
-        game=new Game(context,this,getWidth());
+        game=new Game(context,this);
     }
 
     public void StartGame()

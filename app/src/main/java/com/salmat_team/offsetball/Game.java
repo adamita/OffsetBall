@@ -23,9 +23,9 @@ public class Game {
     private Ball ball;
     private Floor floor;
 
-    public Game(Context context, View view, int w)
+    public Game(Context context, View view)
     {
-        w=480;//jó lenne leolvasni a szélességet
+        int w=480;//jó lenne leolvasni a szélességet
         width=w;
         this.view=view;
         ball=new Ball(context,w/2,0,30,2);
