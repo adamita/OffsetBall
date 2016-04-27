@@ -25,11 +25,10 @@ public class Game {
 
     public Game(Context context, View view)
     {
-        int w=480;//jó lenne leolvasni a szélességet
-        width=w;
+        width=view.getWidth();
         this.view=view;
-        ball=new Ball(context,w/2,0,30,2);
-        floor=new Floor(context,w/2,400,100,25,3);
+        ball=new Ball(context,width/2,0,30,2);
+        floor=new Floor(context,width/2,400,100,25,3);
     }
 
     public void StartGame()
