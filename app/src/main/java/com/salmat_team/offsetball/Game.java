@@ -16,19 +16,23 @@ import java.util.TimerTask;
  */
 public class Game {
     View view;
+    Context context;
     Timer timer;
     TimerTask elapsed=new TimerElapsed();
     int width;
 
     private Ball ball;
     private Floor floor;
+    private Floor floor2;
 
     public Game(Context context, View view)
     {
-        width=view.getWidth();
+        width=480;
         this.view=view;
         ball=new Ball(context,width/2,0,30,2);
-        floor=new Floor(context,width/2,400,100,25,3);
+        floor=new Floor(context,(width-100)/2,400,100,25,3);
+        floor2=new Floor(context,(width-300)/2,500,300,25,3);
+        this.context=context;
     }
 
     public void StartGame()
@@ -46,6 +50,11 @@ public class Game {
     {
         ball.Draw(canvas);
         floor.Draw(canvas);
+        float w=floor2.getRotated();
+        canvas.save();
+        canvas.rotate(w,240,500);
+        floor2.Draw(canvas);
+        canvas.restore();
 
     }
 
@@ -58,9 +67,9 @@ public class Game {
 
         //if(){
         floor.Move(-MotionSensor.getX(),width);
-        /*}else{
-        floor.Rotated(MotionSensor.getX());
-        }*/
+        //}else{
+        floor2.Rotated(-MotionSensor.getX());
+        //}
 
         if(falling)
         {
