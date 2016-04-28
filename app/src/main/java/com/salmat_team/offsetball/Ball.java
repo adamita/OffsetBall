@@ -40,7 +40,7 @@ public class Ball extends GameElement{
         if(gPower!=0)
             setPosition((int)(getX()+side), (int)(getY()+gPower));
 
-        Log.i("Game","Side="+side);
+
     }
 
     public boolean OnFloor(Floor floor, boolean bump)
