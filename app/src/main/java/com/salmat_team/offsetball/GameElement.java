@@ -16,8 +16,7 @@ public class GameElement {
     protected Drawable drawing;
     protected Rect shape=new Rect();
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public GameElement(Context context, int x, int y, int width, int height)
+    public GameElement(int x, int y, int width, int height)
     {
         this.width = width;
         this.height = height;

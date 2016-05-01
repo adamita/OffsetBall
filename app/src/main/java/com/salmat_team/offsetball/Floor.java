@@ -26,7 +26,8 @@ public class Floor extends GameElement{
 
     public Floor(Context context, int x, int y, int width, int height, double substance)
     {
-        super(context,x,y,width,height);
+
+        super(x,y,width,height);
         rotated=0;
         this.substance=substance;
 
@@ -35,7 +36,7 @@ public class Floor extends GameElement{
     }
 
 
-    public void Move(float m, int w)
+    public void Move(Ball ball,float m, int w)
     {
         int x=this.getX();
         int e=(this.getWidth()<<10);
@@ -60,7 +61,13 @@ public class Floor extends GameElement{
         {
             x=(int)(((w/2)+(w-e))*((int)m));
         }*/
+
+
+//        if(shape.intersect(ball.getShape()))
+//            ball.MoveWith(getX()-x,0);
+
         setPosition(x,this.getY());
+
     }
 
     public float getRotated(){return rotated;}
@@ -94,6 +101,7 @@ public class Floor extends GameElement{
             x=(int)(((w/2)+(w-e))*((int)m));
         }*/
         //setPosition(x,this.getY());
+
     }
 
     public double getSubstance() {

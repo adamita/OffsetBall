@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.os.Build;
@@ -13,34 +14,39 @@ import android.util.Log;
 /**
  * Created by adamita on 2016. 04. 27..
  */
-public class Ball extends GameElement{
+public class Ball extends GameElement {
     double gPower;
     int maxGPower;
 
-    public Ball(Context context, int x, int y, int size, int maxGPower)
-    {
-        super(context,x,y,size,size);
 
-        gPower=0;
-        this.maxGPower=maxGPower;
+    public Ball(Context context, int x, int y, int size, int maxGPower) {
+        super(x, y, size, size);
 
-        drawing=ContextCompat.getDrawable(context, R.drawable.ball);
+        gPower = 0;
+        this.maxGPower = maxGPower;
+
+        drawing = ContextCompat.getDrawable(context, R.drawable.ball);
     }
 
-    public void Move(int x, int y)
-    {
-        setPosition(x,y);
+    public void Move(int x, int y) {
+        setPosition(x, y);
     }
 
-    public void Fall(double g, double side)
+    public void MoveWith(int x, int y) {
+        setPosition(getX() + x, getY() + y);
+    }
+
+    public void Fall(double g, double side) {
+        if (gPower < maxGPower)
+            gPower += g;
+
+        if (gPower != 0)
+            setPosition((int) (getX() + side), (int) (getY() + gPower));
+    }
+
+    public boolean Fallen(int height)
     {
-        if(gPower<maxGPower)
-            gPower+=g;
-
-        if(gPower!=0)
-            setPosition((int)(getX()+side), (int)(getY()+gPower));
-
-
+        return getY()>=height;
     }
 
     public boolean OnFloor(Floor floor, boolean bump)

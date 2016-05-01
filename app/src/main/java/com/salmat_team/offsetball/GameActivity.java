@@ -31,13 +31,7 @@ public class GameActivity extends AppCompatActivity {
         manager= (SensorManager) getSystemService(SENSOR_SERVICE);
         fragm = getIntent().getExtras().getString("fragment",null);
 
-//<<<<<<< Updated upstream
-//        //loadFragment();
-//=======
-//
-//>>>>>>> Stashed changes
-//        //TextView TV=(TextView)findViewById(R.id.textView);
-//        //TV.setText(fragm);
+
 
 
 
@@ -78,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
         switch (fragm) {
             case "Game":
                 ft.addToBackStack(GameFragment.class.getName());
-                ft.add(R.id.fragment_game1, new GameFragment());
+                ft.add(R.id.game_fragment, new GameFragment());
                 break;
             case "Options":
                 ft.addToBackStack(OptionsFragment.class.getName());

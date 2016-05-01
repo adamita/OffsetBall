@@ -12,34 +12,41 @@ import android.view.View;
  */
 public class GameSpaceView extends View {
 
-    private int width;
-    private int height;
     private Game game;
 
     public GameSpaceView(Context context) {
         super(context);
-        init(context);
+        init(context, this);
+
     }
 
     public GameSpaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init(context, this);
     }
 
     public GameSpaceView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init(context, this);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public GameSpaceView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context);
+        init(context, this);
     }
 
-    private void init(Context context)
+    private void init(final Context context, final View view)
     {
-        game=new Game(context,this);
+        this.invalidate();
+        this.post(new Runnable() {
+            @Override
+            public void run() {
+                game=new Game(context,view,getMeasuredWidth(),getMeasuredHeight());
+                StartGame();
+            }
+        });
+
     }
 
     public void StartGame()
@@ -58,7 +65,8 @@ public class GameSpaceView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        game.Draw(canvas);
+        if(game!=null)
+            game.Draw(canvas);
 
     }
 }
