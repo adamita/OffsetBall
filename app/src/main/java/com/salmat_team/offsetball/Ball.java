@@ -1,15 +1,7 @@
 package com.salmat_team.offsetball;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 /**
  * Created by adamita on 2016. 04. 27..
@@ -64,8 +56,8 @@ public class Ball extends GameElement {
                 gPower=-gPower+floor.getSubstance();
                 if(gPower>0)
                 {
-                    gPower=0;
-                    setPosition(getX(),floor.getY()-getHeight()+1);
+                    gPower = 0;
+                    setPosition(getX(), floor.getY() - getHeight() + 1);
                 }
             }
             return true;

@@ -3,13 +3,9 @@ package com.salmat_team.offsetball;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.hardware.SensorManager;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -80,12 +76,13 @@ public class Game {
 
     private void Gravitation()
     {
-        boolean falling=true;//ball.OnFloor(floor,true);
+
+        boolean falling = !ball.OnFloor(floor, true);
 
         //if(){
 
 //        floor.Move(-MotionSensor.getX(),width);
-//        //}else{
+//        //}else
 //        floor2.Rotated(-MotionSensor.getX());
 //        //}
 
