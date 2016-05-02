@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,14 +19,14 @@ public class Game {
     Context context;
     Timer timer;
     TimerTask elapsed=new TimerElapsed();
+    //    Invalidate invalidateGame=new Invalidate();
     int width;
     int height;
 
     Activity activity;
 
     private Ball ball;
-    private Floor floor;
-    private Floor floor2;
+    private ArrayList<Floor> floors = new ArrayList<>();
 
     public Game(final Context context, final View view, int width, int height)
     {
@@ -36,19 +37,9 @@ public class Game {
 
 
         ball=new Ball(context,width/2,0,30,2);
-        floor=new Floor(context,(width-100)/2,400,100,25,3);
-        floor2=new Floor(context,(width-300)/2,500,300,25,3);
+        floors.add(new Floor(context, (width - 100) / 2, 400, 100, 25, 3));
+        floors.add(new Floor(context, (width - 300) / 2, 500, 300, 25, 3));
 
-//        this.view=view;
-//        view.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                width=view.getMeasuredWidth();
-//                ball=new Ball(context,width/2,0,30,2);
-//                floor=new Floor(context,width/2,400,100,25,3);
-//                StartGame();
-//            }
-//        });
     }
 
     public void StartGame()
@@ -65,19 +56,24 @@ public class Game {
     public void Draw(Canvas canvas)
     {
         ball.Draw(canvas);
-        floor.Draw(canvas);
-        float w=floor2.getRotated();
-        canvas.save();
-        canvas.rotate(w,240,500);
-        floor2.Draw(canvas);
-        canvas.restore();
+
+
+        for (Floor floor : floors) {
+            floor.Draw(canvas);
+        }
 
     }
 
     private void Gravitation()
     {
 
-        boolean falling = !ball.OnFloor(floor, true);
+        boolean falling = true;
+        for (Floor floor : floors) {
+            if (floor.onTop(ball)) {
+                falling = false;
+                break;
+            }
+        }
 
         //if(){
 
@@ -86,7 +82,8 @@ public class Game {
 //        floor2.Rotated(-MotionSensor.getX());
 //        //}
 
-        floor.Move(ball, -MotionSensor.getX(),width);
+        floors.get(0).Move(ball, -MotionSensor.getX(), width);
+        floors.get(1).addRotate(10);
         /*}else{
         floor.Rotated(MotionSensor.getX());
         }*/
@@ -117,8 +114,27 @@ public class Game {
         @Override
         public void run() {
             Gravitation();
-
             view.postInvalidate();
+
+
+//            view.post(invalidateGame);
+
+
         }
     }
+
+//    public class Invalidate implements Runnable {
+//
+//        @Override
+//        public void run() {
+//            if(ball!=null)
+//                view.invalidate(ball.getRect());
+//
+//            if(floors!=null)
+//                for (Floor floor : floors)
+//                {
+//                    view.invalidate(floor.getShape());
+//                }
+//        }
+//    }
 }

@@ -1,20 +1,7 @@
 package com.salmat_team.offsetball;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.shapes.Shape;
-import android.os.Build;
-import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
-import android.widget.TextView;
 
 /**
  * Created by adamita on 2016. 04. 27..
@@ -22,16 +9,15 @@ import android.widget.TextView;
 public class Floor extends GameElement{
 
     protected double substance;
-    private float rotated;
 
     public Floor(Context context, int x, int y, int width, int height, double substance)
     {
-
         super(x,y,width,height);
-        rotated=0;
+        setBitmap(ContextCompat.getDrawable(context, R.drawable.floor));
         this.substance=substance;
 
-        drawing=ContextCompat.getDrawable(context, R.drawable.floor);
+        rotate = 0;
+        //bitmap=((BitmapDrawable)ContextCompat.getDrawable(context, R.drawable.floor)).getBitmap();
 
     }
 
@@ -70,7 +56,6 @@ public class Floor extends GameElement{
 
     }
 
-    public float getRotated(){return rotated;}
 
     public void Rotated(float m)
     {
@@ -83,13 +68,17 @@ public class Floor extends GameElement{
 
         if(m>1)
         {
-            if(rotated<30){rotated+=3;}
+            if (rotate < 30) {
+                rotate += 3;
+            }
         }
         else
         {
             if(m<-1)
             {
-                if(rotated>-30){rotated-=3;}
+                if (rotate > -30) {
+                    rotate -= 3;
+                }
             }
         }
         /*if((this.getX()+e)<(w/2))
@@ -107,4 +96,6 @@ public class Floor extends GameElement{
     public double getSubstance() {
         return substance;
     }
+
+
 }

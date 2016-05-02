@@ -13,11 +13,9 @@ public class Ball extends GameElement {
 
     public Ball(Context context, int x, int y, int size, int maxGPower) {
         super(x, y, size, size);
-
-        gPower = 0;
         this.maxGPower = maxGPower;
 
-        drawing = ContextCompat.getDrawable(context, R.drawable.ball);
+        setBitmap(ContextCompat.getDrawable(context, R.drawable.ball));
     }
 
     public void Move(int x, int y) {
@@ -71,6 +69,6 @@ public class Ball extends GameElement {
 
     private boolean OnFloor(Floor floor)
     {
-        return Intersect(floor);
+        return onTop(floor);
     }
 }
