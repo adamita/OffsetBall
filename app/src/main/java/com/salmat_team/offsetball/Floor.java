@@ -10,9 +10,9 @@ public class Floor extends GameElement{
 
     protected double substance;
 
-    public Floor(Context context, int x, int y, int width, int height, double substance)
+    public Floor(Context context, int x, int y, int width, int height, double substance, int screenWidth, int screenHeight)
     {
-        super(x,y,width,height);
+        super(x, y, width, height, screenWidth, screenHeight);
         setBitmap(ContextCompat.getDrawable(context, R.drawable.floor));
         this.substance=substance;
 
@@ -22,21 +22,19 @@ public class Floor extends GameElement{
     }
 
 
-    public void Move(Ball ball,float m, int w)
+    public void Move(Ball ball, float m)
     {
         int x=this.getX();
         int e=(this.getWidth()<<10);
         if(m>1)
         {
-            if(w>this.getX()+this.getWidth())
+            if (screenWidth > this.getX() + this.getWidth())
             {x=this.getX()+20;}
-        }
-        else
+        } else if (m < -1)
         {
-            if(m<-1)
-            {
-                if(0<this.getX())
-                {x=this.getX()-20;}
+
+            if (0 < this.getX()) {
+                x = this.getX() - 20;
             }
         }
         /*if((this.getX()+e)<(w/2))
@@ -52,35 +50,80 @@ public class Floor extends GameElement{
 //        if(shape.intersect(ball.getShape()))
 //            ball.MoveWith(getX()-x,0);
 
-        setPosition(x,this.getY());
+        if (m != 0)
+            setPosition(x, this.getY());
 
     }
 
 
-    public void Rotated(float m)
+    public void Rotate(Ball ball, float m)
     {
+
+        Boolean onTop = ball.isOnTop(this);
+        setRotate(m);
+        if (onTop || ball.isOnTop(this))
+            ball.setOnFloorTop(this);
+
+
+//        if(isInsideRotation(ball))
+//        {
+//
+//
+//            if(ball.getCenterX()<getCenterX()) {
+//                //baloldal
+//                if (m > 0)
+//                {
+//                    //fel
+//                    ballAbove=ball.isOnTop(this);
+//
+//                } else
+//                {
+//                    //le
+//                    ballUnder=ball.isOnBottom(this);
+//                }
+//
+//            }
+//            else
+//            {
+//                //jobboldal
+//                if (m > 0)
+//                {
+//                    //le
+//                    ballUnder=ball.isOnBottom(this);
+//
+//
+//                } else
+//                {
+//                    //fel
+//                    ballAbove=ball.isOnTop(this);
+//
+//                }
+//            }
+//        }
+
+
+
+
         //int x=this.getX();
         //int e=(this.getWidth()<<10);
 
-
-
         //view.setRotation();
 
-        if(m>1)
-        {
-            if (rotate < 30) {
-                rotate += 3;
-            }
-        }
-        else
-        {
-            if(m<-1)
-            {
-                if (rotate > -30) {
-                    rotate -= 3;
-                }
-            }
-        }
+//        if(m>1)
+//        {
+//            if (rotate < 30) {
+//                rotate += 3;
+//            }
+//        }
+//        else
+//        {
+//            if(m<-1)
+//            {
+//                if (rotate > -30) {
+//                    rotate -= 3;
+//                }
+//            }
+//        }
         /*if((this.getX()+e)<(w/2))
         {
             x=(int)(((w/2)-e)*((int)m));

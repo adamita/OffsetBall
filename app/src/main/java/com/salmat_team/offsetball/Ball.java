@@ -9,8 +9,8 @@ import java.util.List;
 
 import math.geom2d.AffineTransform2D;
 import math.geom2d.Point2D;
-import math.geom2d.conic.Circle2D;
 import math.geom2d.conic.EllipseShape2D;
+import math.geom2d.line.Line2D;
 
 /**
  * Created by adamita on 2016. 04. 27..
@@ -18,74 +18,131 @@ import math.geom2d.conic.EllipseShape2D;
 public class Ball extends GameElement {
     double gPower;
     int maxGPower;
-    EllipseShape2D circle;
 
-    public Ball(Context context, int x, int y, int size, int maxGPower) {
-        super(x, y, size, size);
+    Collection<Point2D> intersections = new ArrayList<Point2D>();
+
+    public Ball(Context context, int x, int y, int size, int maxGPower, int screenWidth, int screenHeight) {
+        super(x, y, size, size, screenWidth, screenHeight);
         this.maxGPower = maxGPower;
         setBitmap(ContextCompat.getDrawable(context, R.drawable.ball));
-        circle = new Circle2D(getCenterX(), getCenterY(), size >> 1);
-    }
-
-    public void Move(int x, int y) {
-//        circle = circle.transform(AffineTransform2D.createTranslation(x - getX(), y - getY()));
-        setPosition(x, y);
 
     }
+
+//    public void Move(int x, int y) {
+////        circle = circle.transform(AffineTransform2D.createTranslation(x - getX(), y - getY()));
+//        setPosition(x, y);
+//
+//    }
 
     public void MoveWith(int x, int y) {
-        circle = circle.transform(AffineTransform2D.createTranslation(x, y));
-        setPosition(getX() + x, getY() + y);
-
+        if (screenWidth < getRight() + x)
+            setPosition(screenWidth - getWidth(), getY() + y);
+        else if (0 > getX() + x)
+            setPosition(0, getY() + y);
+        else
+            setPosition(getX() + x, getY() + y);
     }
+
+    public void setOnFloorTop(Floor floor) {
+        Line2D topLine = floor.getTopLine();
+        double dist = topLine.distance(getCenterX(), getBottom());
+        double disth = topLine.distance(getCenterX(), getBottom() + 1);
+
+        if (dist > disth) {
+            //felette
+            MoveWith(0, (int) dist);
+
+        } else {
+            //alatta
+            MoveWith(0, (int) -dist);
+        }
+    }
+
+    public void setOnFloorBottom(Floor floor) {
+        Line2D topLine = floor.getBottomLine();
+        double dist = topLine.distance(getCenterX(), getY());
+        double disth = topLine.distance(getCenterX(), getY() + 1);
+
+        if (dist > disth) {
+            //felette
+            MoveWith(0, (int) -dist);
+
+        } else {
+            //alatta
+            MoveWith(0, (int) dist);
+        }
+    }
+
+    public Boolean isOnTop(Floor floor) {
+        return !circle.intersections(floor.getTopLine()).isEmpty();
+    }
+
+    public Boolean isOnBottom(Floor floor) {
+        return !circle.intersections(floor.getTopLine()).isEmpty();
+    }
+
 
     public void Fall(double g, double side, List<Floor> floors) {
 
         EllipseShape2D hcircle;
-        if (gPower < maxGPower)
-            gPower += g;
-        else
-            gPower = maxGPower;
-
-        if (gPower != 0) {
-            hcircle = circle.transform(AffineTransform2D.createTranslation((int) side, (int) gPower));
+        Floor floor = null;
 
 
-            boolean falling = true;
-            int i;
-            Collection<Point2D> intersections = new ArrayList<Point2D>();
-            for (i = floors.size() - 1; i >= 0 && falling; i--) {
-                intersections = hcircle.intersections(floors.get(i).getTopLine());
-                if (!intersections.isEmpty())
-                    falling = false;
-            }
-
-            if (falling) {
-                MoveWith((int) side, (int) gPower);
-            } else {
-                Floor floor = floors.get(i + 1);
-                intersections = circle.intersections(floor.getTopLine());
-                gPower = 0;
-                switch (intersections.size()) {
-                    case 0:
-                        MoveWith(0, (int) floor.getTopLine().distance(getCenterX(), getBottom()));
-                        break;
-                    case 1:
-                        break;
-                    default:
-                        MoveWith(0, (int) -floor.getTopLine().distance(getCenterX(), getBottom()));
-                        break;
-                }
-
+        //Földön állunk?
+        for (Floor f : floors) {
+            intersections = circle.intersections(f.getTopLine());
+            if (!intersections.isEmpty()) {
+                floor = f;
+                break;
             }
         }
 
+        if (floor == null) {
+            //Ha nem földön állunk akkor esni kell
+
+            if (gPower < maxGPower)
+                gPower += g;
+            else
+                gPower = maxGPower;
+
+
+            hcircle = circle.transform(AffineTransform2D.createTranslation((int) side, (int) gPower));
+
+
+            for (Floor f : floors) {
+                intersections = hcircle.intersections(f.getTopLine());
+                if (!intersections.isEmpty()) {
+                    floor = f;
+                    break;
+                }
+            }
+
+
+            if (floor == null) {
+
+                MoveWith((int) side, (int) gPower);
+
+            } else {
+                gPower = 0;
+                setOnFloorTop(floor);
+            }
+        } else {
+            //Ha földön állunk gurulunk
+            float gradient = floor.getRotate() / 90;
+            if (gPower < maxGPower * gradient)
+                gPower += g * gradient;
+            else
+                gPower = maxGPower * gradient;
+
+            MoveWith((int) gPower, (int) floor.getTopLine().distance(getCenterX() + gPower, getBottom()));
+
+        }
 
     }
 
-    public boolean Fallen(int height)
+    public boolean Fallen()
     {
-        return getY()>=height;
+        return getY() >= screenHeight;
     }
 
 //    public boolean onFloor(Floor floor, boolean bump)
