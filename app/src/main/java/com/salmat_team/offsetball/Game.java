@@ -39,6 +39,7 @@ public class Game {
         ball=new Ball(context,width/2,0,30,2);
         floors.add(new Floor(context, (width - 100) / 2, 400, 100, 25, 3));
         floors.add(new Floor(context, (width - 300) / 2, 500, 300, 25, 3));
+        floors.get(1).setRotate(30);
 
     }
 
@@ -69,7 +70,7 @@ public class Game {
 
         boolean falling = true;
         for (Floor floor : floors) {
-            if (floor.onTop(ball)) {
+            if (ball.onFloor(floor)) {
                 falling = false;
                 break;
             }
@@ -83,7 +84,6 @@ public class Game {
 //        //}
 
         floors.get(0).Move(ball, -MotionSensor.getX(), width);
-        floors.get(1).addRotate(10);
         /*}else{
         floor.Rotated(MotionSensor.getX());
         }*/
