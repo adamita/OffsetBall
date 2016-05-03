@@ -3,6 +3,7 @@ package com.salmat_team.offsetball;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class Ball extends GameElement {
         EllipseShape2D hcircle;
         if (gPower < maxGPower)
             gPower += g;
+        else
+            gPower = maxGPower;
 
         if (gPower != 0) {
             hcircle = circle.transform(AffineTransform2D.createTranslation((int) side, (int) gPower));
@@ -50,22 +53,31 @@ public class Ball extends GameElement {
 
             boolean falling = true;
             int i;
-            Collection<Point2D> intersections;
+            Collection<Point2D> intersections = new ArrayList<Point2D>();
             for (i = floors.size() - 1; i >= 0 && falling; i--) {
-                intersections = hcircle.intersections(floors.get(i).getTop());
+                intersections = hcircle.intersections(floors.get(i).getTopLine());
                 if (!intersections.isEmpty())
                     falling = false;
             }
 
             if (falling) {
                 MoveWith((int) side, (int) gPower);
+            } else {
+                Floor floor = floors.get(i + 1);
+                intersections = circle.intersections(floor.getTopLine());
+                gPower = 0;
+                switch (intersections.size()) {
+                    case 0:
+                        MoveWith(0, (int) floor.getTopLine().distance(getCenterX(), getBottom()));
+                        break;
+                    case 1:
+                        break;
+                    default:
+                        MoveWith(0, (int) -floor.getTopLine().distance(getCenterX(), getBottom()));
+                        break;
+                }
+
             }
-//            else
-//            {
-//                int y=0;
-//
-//                Move(getX() + (int) side,y);
-//            }
         }
 
 

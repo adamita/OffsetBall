@@ -46,8 +46,11 @@ public class GameElement {
 
         canvas.drawBitmap(bitmap, matrix, null);
         Paint p = new Paint();
-        p.setARGB(200, 200, 200, 200);
-        //canvas.drawLine((float)getTop().getX1(),(float)getTop().getY1(),(float)getTop().getX2(),(float)getTop().getY2(),p);
+        p.setStrokeWidth(2);
+        p.setARGB(200, 255, 0, 0);
+
+        //Draw top -- help
+        canvas.drawLine((float) getTopLine().getX1(), (float) getTopLine().getY1(), (float) getTopLine().getX2(), (float) getTopLine().getY2(), p);
     }
 
     public void setPosition(int x, int y) {
@@ -98,11 +101,19 @@ public class GameElement {
         return rect.centerY();
     }
 
-    public Line2D getTop() {
+    public int getBottom() {
+        return rect.bottom;
+    }
+
+    public int getRight() {
+        return rect.right;
+    }
+
+    public Line2D getTopLine() {
         return topLine.transform(rotation);
     }
 
-    public Line2D getBottom() {
+    public Line2D getBottomLine() {
         return bottomLine.transform(rotation);
     }
 }

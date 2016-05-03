@@ -36,7 +36,7 @@ public class Game {
         this.context=context;
 
 
-        ball=new Ball(context,width/2,0,30,2);
+        ball = new Ball(context, width / 2, 0, 30, 10);
         floors.add(new Floor(context, (width - 100) / 2, 400, 100, 25, 3));
         floors.add(new Floor(context, (width - 300) / 2, 500, 300, 25, 3));
         floors.get(1).setRotate(30);
@@ -68,22 +68,10 @@ public class Game {
     private void Gravitation()
     {
 
-
-
-        //if(){
-
-//        floor.Move(-MotionSensor.getX(),width);
-//        //}else
-//        floor2.Rotated(-MotionSensor.getX());
-//        //}
-
         floors.get(0).Move(ball, -MotionSensor.getX(), width);
-        /*}else{
-        floor.Rotated(MotionSensor.getX());
-        }*/
+        //floors.get(1).setRotate(-MotionSensor.getX());
 
-
-        ball.Fall(5, -MotionSensor.getX() * 3, floors);
+        ball.Fall(2, -MotionSensor.getX() * 3, floors);
 
 
         if(ball.Fallen(height))
