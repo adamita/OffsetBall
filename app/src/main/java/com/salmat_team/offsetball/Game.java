@@ -36,9 +36,9 @@ public class Game {
         this.context=context;
 
 
-        ball = new Ball(context, width / 2, 0, 30, 10, width, height);
-        floors.add(new Floor(context, (width - 100) / 2, 400, 100, 25, 3, width, height));
-        floors.add(new Floor(context, (width - 300) / 2, 500, 300, 25, 3, width, height));
+        ball = new Ball(context, width / 2, 0, 30, 10, true, width, height);
+        floors.add(new Floor(context, (width - 100) / 2, 400, 100, 25, 2, width, height));
+        floors.add(new Floor(context, (width - 300) / 2, 500, 300, 25, 2, width, height));
 //        floors.get(1).setRotate(30);
 
     }

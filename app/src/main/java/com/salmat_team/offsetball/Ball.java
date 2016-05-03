@@ -17,13 +17,18 @@ import math.geom2d.line.Line2D;
  */
 public class Ball extends GameElement {
     double gPower;
+    double sPower;
     int maxGPower;
+    Boolean bumping;
 
     Collection<Point2D> intersections = new ArrayList<Point2D>();
 
-    public Ball(Context context, int x, int y, int size, int maxGPower, int screenWidth, int screenHeight) {
+    public Ball(Context context, int x, int y, int size, int maxGPower, Boolean bumping, int screenWidth, int screenHeight) {
         super(x, y, size, size, screenWidth, screenHeight);
+        this.bumping = bumping;
         this.maxGPower = maxGPower;
+        gPower = 0;
+        sPower = 0;
         setBitmap(ContextCompat.getDrawable(context, R.drawable.ball));
 
     }
@@ -99,6 +104,8 @@ public class Ball extends GameElement {
 
         if (floor == null) {
             //Ha nem földön állunk akkor esni kell
+            gPower += sPower;
+            sPower = 0;
 
             if (gPower < maxGPower)
                 gPower += g;
@@ -123,18 +130,27 @@ public class Ball extends GameElement {
                 MoveWith((int) side, (int) gPower);
 
             } else {
-                gPower = 0;
+
                 setOnFloorTop(floor);
+
+                if (!bumping) {
+                    gPower = 0;
+                } else {
+                    gPower = -gPower + floor.getSubstance();
+                }
+
+
             }
         } else {
             //Ha földön állunk gurulunk
-            float gradient = floor.getRotate() / 90;
-            if (gPower < maxGPower * gradient)
-                gPower += g * gradient;
-            else
-                gPower = maxGPower * gradient;
 
-            MoveWith((int) gPower, (int) floor.getTopLine().distance(getCenterX() + gPower, getBottom()));
+            float gradient = floor.getRotate() / 90;
+            if (sPower < maxGPower * gradient)
+                sPower += g * gradient;
+            else
+                sPower = maxGPower * gradient;
+
+            MoveWith((int) sPower, (int) ((int) floor.getTopLine().distance(getCenterX() + sPower, getBottom()) + gPower));
 
         }
 
