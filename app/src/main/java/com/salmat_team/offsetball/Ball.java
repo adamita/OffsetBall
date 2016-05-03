@@ -3,7 +3,11 @@ package com.salmat_team.offsetball;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 
+import java.util.Collection;
+import java.util.List;
+
 import math.geom2d.AffineTransform2D;
+import math.geom2d.Point2D;
 import math.geom2d.conic.Circle2D;
 import math.geom2d.conic.EllipseShape2D;
 
@@ -23,21 +27,48 @@ public class Ball extends GameElement {
     }
 
     public void Move(int x, int y) {
+//        circle = circle.transform(AffineTransform2D.createTranslation(x - getX(), y - getY()));
         setPosition(x, y);
-        circle = circle.transform(AffineTransform2D.createTranslation(getX() - x, getY() - y));
+
     }
 
     public void MoveWith(int x, int y) {
-        setPosition(getX() + x, getY() + y);
         circle = circle.transform(AffineTransform2D.createTranslation(x, y));
+        setPosition(getX() + x, getY() + y);
+
     }
 
-    public void Fall(double g, double side) {
+    public void Fall(double g, double side, List<Floor> floors) {
+
+        EllipseShape2D hcircle;
         if (gPower < maxGPower)
             gPower += g;
 
-        if (gPower != 0)
-            MoveWith((int) side, (int) gPower);
+        if (gPower != 0) {
+            hcircle = circle.transform(AffineTransform2D.createTranslation((int) side, (int) gPower));
+
+
+            boolean falling = true;
+            int i;
+            Collection<Point2D> intersections;
+            for (i = floors.size() - 1; i >= 0 && falling; i--) {
+                intersections = hcircle.intersections(floors.get(i).getTop());
+                if (!intersections.isEmpty())
+                    falling = false;
+            }
+
+            if (falling) {
+                MoveWith((int) side, (int) gPower);
+            }
+//            else
+//            {
+//                int y=0;
+//
+//                Move(getX() + (int) side,y);
+//            }
+        }
+
+
     }
 
     public boolean Fallen(int height)
@@ -73,8 +104,5 @@ public class Ball extends GameElement {
 //
 //    }
 
-    public boolean onFloor(Floor floor)
-    {
-        return !circle.intersections(floor.getTop()).isEmpty();
-    }
+
 }

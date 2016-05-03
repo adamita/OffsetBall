@@ -68,13 +68,7 @@ public class Game {
     private void Gravitation()
     {
 
-        boolean falling = true;
-        for (Floor floor : floors) {
-            if (ball.onFloor(floor)) {
-                falling = false;
-                break;
-            }
-        }
+
 
         //if(){
 
@@ -88,10 +82,9 @@ public class Game {
         floor.Rotated(MotionSensor.getX());
         }*/
 
-        if(falling)
-        {
-            ball.Fall(5,-MotionSensor.getX());
-        }
+
+        ball.Fall(5, -MotionSensor.getX() * 3, floors);
+
 
         if(ball.Fallen(height))
         {
