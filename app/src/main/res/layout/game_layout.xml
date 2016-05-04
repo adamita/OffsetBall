@@ -4,8 +4,8 @@
     android:id="@+id/gameActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.salmat_team.offsetball.GameActivity"
-    android:orientation="vertical">
+    android:screenOrientation="portrait"
+    tools:context="com.salmat_team.offsetball.GameActivity">
     <!--<android.support.v7.widget.AppCompatTextView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -17,8 +17,8 @@
         <!--android:layout_marginTop="10dp" />-->
 
     <fragment
-        android:name="com.salmat_team.offsetball.GameFragment"
         android:id="@+id/gamefragment1"
+        android:name="com.salmat_team.offsetball.GameFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ></fragment>

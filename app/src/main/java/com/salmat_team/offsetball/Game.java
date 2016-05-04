@@ -1,6 +1,5 @@
 package com.salmat_team.offsetball;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.View;
@@ -15,16 +14,14 @@ import java.util.TimerTask;
  */
 public class Game {
 
-    View view;
-    Context context;
-    Timer timer;
     TimerTask elapsed=new TimerElapsed();
-    //    Invalidate invalidateGame=new Invalidate();
-    int width;
-    int height;
-
-    Activity activity;
-
+    private View view;
+    private Context context;
+    private Timer timer;
+    private int width;
+    private int height;
+    private float density;
+    private long timerTime;
     private Ball ball;
     private ArrayList<Floor> floors = new ArrayList<>();
 
@@ -34,11 +31,14 @@ public class Game {
         this.height=height;
         this.view=view;
         this.context=context;
+        density = context.getResources().getDisplayMetrics().density;
+
+        timerTime = 50;
 
 
-        ball = new Ball(context, width / 2, 0, 30, 10, true, width, height);
-        floors.add(new Floor(context, (width - 100) / 2, 400, 100, 25, 2, width, height));
-        floors.add(new Floor(context, (width - 300) / 2, 500, 300, 25, 2, width, height));
+        ball = new Ball(context, 0.5, 0, (int) (20 * density), 15, true, width, height);
+        floors.add(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 2, width, height));
+        floors.add(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 2, width, height));
 //        floors.get(1).setRotate(30);
 
     }
@@ -46,7 +46,7 @@ public class Game {
     public void StartGame()
     {
         timer=new Timer();
-        timer.schedule(elapsed, 0, 50);
+        timer.schedule(elapsed, 0, timerTime);
     }
 
     public void PauseGame()
@@ -69,9 +69,9 @@ public class Game {
     {
 
 
-        ball.Fall(2, -MotionSensor.getX() * 2, floors);
+        ball.Fall(3 * density, -MotionSensor.getX() * density, floors);
 
-        floors.get(0).Move(ball, -MotionSensor.getX());
+        floors.get(0).Move(ball, -MotionSensor.getX() * density);
         floors.get(1).Rotate(ball, -MotionSensor.getX() * 10);
 
 

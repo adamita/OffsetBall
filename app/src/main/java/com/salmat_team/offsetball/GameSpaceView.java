@@ -14,6 +14,7 @@ public class GameSpaceView extends View {
 
     private Game game;
 
+
     public GameSpaceView(Context context) {
         super(context);
         init(context, this);

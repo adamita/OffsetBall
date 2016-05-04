@@ -17,22 +17,31 @@ import math.geom2d.line.Line2D;
 public class GameElement {
 
     protected final Matrix matrix = new Matrix();
+    protected final Rect rect = new Rect();
+
     protected int screenWidth, screenHeight;
     protected float rotate;
     protected Bitmap bitmap;
     protected EllipseShape2D circle;
 
-    protected Rect rect = new Rect();
     private AffineTransform2D rotation = AffineTransform2D.createIdentity();
     private AffineTransform2D transform = AffineTransform2D.createIdentity();
     private Line2D topLine;
     private Line2D bottomLine;
 
 
-    public GameElement(int left, int top, int width, int height, int screenWidth, int screenHeight) {
+    public GameElement(double centerX, double centerY, int width, int height, int screenWidth, int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        rect.set(left, top, left + width, top + height);
+
+
+        int x = (int) (this.screenWidth * centerX) - (width >> 1);
+        int y = (int) (this.screenHeight * centerY) - (height >> 1);
+        int right = x + width;
+        int bottom = y + height;
+
+
+        rect.set(x, y, right, bottom);
         topLine = new Line2D(rect.left, rect.top, rect.right, rect.top);
         bottomLine = new Line2D(rect.left, rect.bottom, rect.right, rect.bottom);
 

@@ -10,9 +10,9 @@ public class Floor extends GameElement{
 
     protected double substance;
 
-    public Floor(Context context, int x, int y, int width, int height, double substance, int screenWidth, int screenHeight)
+    public Floor(Context context, double centerX, double centerY, int width, int height, double substance, int screenWidth, int screenHeight)
     {
-        super(x, y, width, height, screenWidth, screenHeight);
+        super(centerX, centerY, width, height, screenWidth, screenHeight);
         setBitmap(ContextCompat.getDrawable(context, R.drawable.floor));
         this.substance=substance;
 

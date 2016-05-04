@@ -16,6 +16,9 @@ import math.geom2d.line.Line2D;
  * Created by adamita on 2016. 04. 27..
  */
 public class Ball extends GameElement {
+
+    float fallTime;
+
     double gPower;
     double sPower;
     int maxGPower;
@@ -23,12 +26,13 @@ public class Ball extends GameElement {
 
     Collection<Point2D> intersections = new ArrayList<Point2D>();
 
-    public Ball(Context context, int x, int y, int size, int maxGPower, Boolean bumping, int screenWidth, int screenHeight) {
-        super(x, y, size, size, screenWidth, screenHeight);
+    public Ball(Context context, double centerX, double centerY, int size, int maxGPower, Boolean bumping, int screenWidth, int screenHeight) {
+        super(centerX, centerY, size, size, screenWidth, screenHeight);
         this.bumping = bumping;
         this.maxGPower = maxGPower;
         gPower = 0;
         sPower = 0;
+        fallTime = 0;
         setBitmap(ContextCompat.getDrawable(context, R.drawable.ball));
 
     }
@@ -92,6 +96,7 @@ public class Ball extends GameElement {
         EllipseShape2D hcircle;
         Floor floor = null;
 
+        //Log.i("Ball","gBefore: "+gPower);
 
         //Földön állunk?
         for (Floor f : floors) {
@@ -104,16 +109,18 @@ public class Ball extends GameElement {
 
         if (floor == null) {
             //Ha nem földön állunk akkor esni kell
+
             gPower += sPower;
             sPower = 0;
 
-            if (gPower < maxGPower)
-                gPower += g;
+            double newgPower;
+
+            if (g + gPower < maxGPower)
+                newgPower = gPower + g;
             else
-                gPower = maxGPower;
+                newgPower = maxGPower;
 
-
-            hcircle = circle.transform(AffineTransform2D.createTranslation((int) side, (int) gPower));
+            hcircle = circle.transform(AffineTransform2D.createTranslation((int) side, (int) newgPower));
 
 
             for (Floor f : floors) {
@@ -127,16 +134,19 @@ public class Ball extends GameElement {
 
             if (floor == null) {
 
+                gPower = newgPower;
                 MoveWith((int) side, (int) gPower);
 
             } else {
+                //Log.i("Ball","Ráesett");
+
 
                 setOnFloorTop(floor);
 
                 if (!bumping) {
                     gPower = 0;
                 } else {
-                    gPower = -gPower + floor.getSubstance();
+                    gPower = (-gPower) + floor.getSubstance();
                 }
 
 
@@ -144,15 +154,24 @@ public class Ball extends GameElement {
         } else {
             //Ha földön állunk gurulunk
 
+            //Log.i("Ball","Gurul");
+
             float gradient = floor.getRotate() / 90;
-            if (sPower < maxGPower * gradient)
-                sPower += g * gradient;
+
+            double pluspower = g * gradient;
+            double realMaxG = maxGPower * gradient;
+            if (sPower + pluspower < realMaxG)
+                sPower += pluspower;
             else
-                sPower = maxGPower * gradient;
+                sPower = realMaxG;
+
+            if (gPower > 0)
+                gPower = 0;
 
             MoveWith((int) sPower, (int) ((int) floor.getTopLine().distance(getCenterX() + sPower, getBottom()) + gPower));
-
         }
+
+        //Log.i("Ball","gAfter: "+gPower);
 
     }
 
