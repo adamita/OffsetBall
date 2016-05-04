@@ -37,8 +37,8 @@ public class Game {
 
 
         ball = new Ball(context, 0.5, 0, (int) (20 * density), 15, true, width, height);
-        floors.add(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 2, width, height));
-        floors.add(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 2, width, height));
+        floors.add(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 1, width, height));
+        floors.add(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 1, width, height));
 //        floors.get(1).setRotate(30);
 
     }
@@ -69,7 +69,7 @@ public class Game {
     {
 
 
-        ball.Fall(3 * density, -MotionSensor.getX() * density, floors);
+        ball.Fall(2 * density, -MotionSensor.getX() * density, floors);
 
         floors.get(0).Move(ball, -MotionSensor.getX() * density);
         floors.get(1).Rotate(ball, -MotionSensor.getX() * 10);
