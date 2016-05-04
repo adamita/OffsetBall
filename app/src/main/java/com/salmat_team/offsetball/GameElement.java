@@ -3,7 +3,6 @@ package com.salmat_team.offsetball;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
@@ -59,11 +58,14 @@ public class GameElement {
         matrix.postRotate(rotate, rect.centerX(), rect.centerY());
 
         canvas.drawBitmap(bitmap, matrix, null);
-        Paint p = new Paint();
-        p.setStrokeWidth(2);
-        p.setARGB(200, 255, 0, 0);
+
 
         //Draw top -- help
+//        Paint p = new Paint();
+//        p.setStrokeWidth(2);
+//        p.setARGB(200, 255, 0, 0);
+
+
         //canvas.drawLine((float) getTopLine().getX1(), (float) getTopLine().getY1(), (float) getTopLine().getX2(), (float) getTopLine().getY2(), p);
     }
 

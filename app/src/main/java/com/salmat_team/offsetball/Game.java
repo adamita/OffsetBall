@@ -46,7 +46,7 @@ public class Game {
     public void StartGame()
     {
         timer=new Timer();
-        timer.schedule(elapsed,0,100);
+        timer.schedule(elapsed, 0, 50);
     }
 
     public void PauseGame()

@@ -58,81 +58,23 @@ public class Floor extends GameElement{
 
     public void Rotate(Ball ball, float m)
     {
+        float add = m - getRotate();
+        if (add >= 10)
+            add = 10;
+        else if (add <= -10)
+            add = -10;
 
         Boolean onTop = ball.isOnTop(this);
-        setRotate(m);
+        Boolean onBottom = ball.isOnBottom(this);
+
+        addRotate(add);
+
         if (onTop || ball.isOnTop(this))
             ball.setOnFloorTop(this);
+        else if (onBottom || ball.isOnBottom(this))
+            ball.setOnFloorBottom(this);
 
 
-//        if(isInsideRotation(ball))
-//        {
-//
-//
-//            if(ball.getCenterX()<getCenterX()) {
-//                //baloldal
-//                if (m > 0)
-//                {
-//                    //fel
-//                    ballAbove=ball.isOnTop(this);
-//
-//                } else
-//                {
-//                    //le
-//                    ballUnder=ball.isOnBottom(this);
-//                }
-//
-//            }
-//            else
-//            {
-//                //jobboldal
-//                if (m > 0)
-//                {
-//                    //le
-//                    ballUnder=ball.isOnBottom(this);
-//
-//
-//                } else
-//                {
-//                    //fel
-//                    ballAbove=ball.isOnTop(this);
-//
-//                }
-//            }
-//        }
-
-
-
-
-        //int x=this.getX();
-        //int e=(this.getWidth()<<10);
-
-        //view.setRotation();
-
-//        if(m>1)
-//        {
-//            if (rotate < 30) {
-//                rotate += 3;
-//            }
-//        }
-//        else
-//        {
-//            if(m<-1)
-//            {
-//                if (rotate > -30) {
-//                    rotate -= 3;
-//                }
-//            }
-//        }
-        /*if((this.getX()+e)<(w/2))
-        {
-            x=(int)(((w/2)-e)*((int)m));
-        }
-        else
-        {
-            x=(int)(((w/2)+(w-e))*((int)m));
-        }*/
-        //setPosition(x,this.getY());
 
     }
 
