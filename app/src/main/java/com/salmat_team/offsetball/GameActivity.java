@@ -5,6 +5,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +25,31 @@ public class GameActivity extends AppCompatActivity {
 
     String fragm="";
     SensorManager manager;
+    TextView timeTV;
+    //String time="00:00:00";
+    long milli=0;
+    long startTime=0L;
+    int secund=0;
+    int minute=0;
+
+
+    Handler timeH = new Handler();
+    Runnable timeR = new Runnable() {
+        @Override
+        public void run() {
+            milli = System.currentTimeMillis()-startTime;
+            secund = (int) (milli/1000);
+            minute = secund/60;
+            secund=secund%60;
+
+            //timeTV.setText(String.format("%d:%02d", m, s));
+            timeTV.setText("" + minute + ":"
+                    + String.format("%02d", secund) + ":"
+                    + String.format("%03d", (int)(milli%1000)));
+            timeH.postDelayed(this,0);
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +57,12 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_layout);
         manager= (SensorManager) getSystemService(SENSOR_SERVICE);
         fragm = getIntent().getExtras().getString("fragment",null);
-
-
+        timeTV=(TextView)findViewById(R.id.TimeTV);
+        startTime=System.currentTimeMillis();
+        //timeH.post(timeR);
+        //timeH.removeCallbacks(timeR);
+        timeTV.post(timeR);
+        //timeTV.setText(time);
 
 
 

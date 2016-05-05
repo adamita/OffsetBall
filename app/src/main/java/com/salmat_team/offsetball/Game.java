@@ -37,14 +37,12 @@ public class Game {
 
         timerTime = 50;
 
-        ball = new Ball(context, 0.5, 0, (int) (20 * density), 15, true, width, height);
+        ball = new Ball(context, 0.5, 0, (int) (20 * density), 15, false, width, height);
         //floors.add(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 1, width, height));
         //floors.add(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 1, width, height));
         if(1==Integer.valueOf(view.getTag().toString()))
         {
             floor=(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 1, width, height));
-            Toast.makeText(context, view.getTag().toString(),
-                    Toast.LENGTH_LONG).show();
         }
         else
         {
