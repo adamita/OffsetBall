@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatButton start = (AppCompatButton) findViewById(R.id.StartButton);
         AppCompatButton options = (AppCompatButton) findViewById(R.id.OptionsButton);
+        AppCompatButton exit = (AppCompatButton)findViewById(R.id.ExitButton);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent i=new Intent(MainActivity.this,GameActivity.class);
                 i.putExtra("fragment","Options");
                 startActivity(i);
+            }
+        });
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

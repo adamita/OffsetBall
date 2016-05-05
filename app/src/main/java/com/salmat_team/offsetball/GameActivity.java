@@ -73,6 +73,8 @@ public class GameActivity extends AppCompatActivity {
             case "Game":
                 ft.addToBackStack(GameFragment.class.getName());
                 ft.add(R.id.game_fragment, new GameFragment());
+                ft.addToBackStack(GameFragment2.class.getName());
+                ft.add(R.id.game_fragment, new GameFragment2());
                 break;
             case "Options":
                 ft.addToBackStack(OptionsFragment.class.getName());

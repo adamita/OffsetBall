@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/game_fragment" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/game_fragment2" android:layout_width="match_parent" android:layout_height="match_parent"
     android:screenOrientation="portrait"
-    android:tag="1"
+    android:tag="2"
     >
     <com.salmat_team.offsetball.GameSpaceView
-        android:id="@+id/gameSpaceView"
+        android:id="@+id/gameSpaceView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:tag="1"/>
+        android:tag="2"/>
 </LinearLayout>

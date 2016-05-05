@@ -11,6 +11,7 @@ import android.view.ViewGroup;
  */
 public class OptionsFragment extends Fragment {
     private View root;
+    private GameSpaceView gameView;
 
 
     public View onCreateView (LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
@@ -18,4 +19,8 @@ public class OptionsFragment extends Fragment {
         root=inflater.inflate(R.layout.options_fragment,container,false);
         return root;
     }
+
+
+
+
 }

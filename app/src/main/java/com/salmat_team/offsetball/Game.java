@@ -23,7 +23,9 @@ public class Game {
     private float density;
     private long timerTime;
     private Ball ball;
-    private ArrayList<Floor> floors = new ArrayList<>();
+    //private ArrayList<Floor> floors = new ArrayList<>();
+    private Floor floor;
+    private int numFrag;
 
     public Game(final Context context, final View view, int width, int height)
     {
@@ -35,10 +37,19 @@ public class Game {
 
         timerTime = 50;
 
-
         ball = new Ball(context, 0.5, 0, (int) (20 * density), 15, true, width, height);
-        floors.add(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 1, width, height));
-        floors.add(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 1, width, height));
+        //floors.add(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 1, width, height));
+        //floors.add(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 1, width, height));
+        if(1==Integer.valueOf(view.getTag().toString()))
+        {
+            floor=(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 1, width, height));
+            Toast.makeText(context, view.getTag().toString(),
+                    Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            floor=(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 1, width, height));
+        }
 //        floors.get(1).setRotate(30);
 
     }
@@ -58,10 +69,9 @@ public class Game {
     {
         ball.Draw(canvas);
 
-
-        for (Floor floor : floors) {
+        //for (Floor floor : floors) {
             floor.Draw(canvas);
-        }
+        //}
 
     }
 
@@ -69,10 +79,20 @@ public class Game {
     {
 
 
-        ball.Fall(2 * density, -MotionSensor.getX() * density, floors);
 
-        floors.get(0).Move(ball, -MotionSensor.getX() * density);
-        floors.get(1).Rotate(ball, -MotionSensor.getX() * 10);
+
+        if(1==Integer.valueOf(view.getTag().toString()))
+        {
+            floor.Move(ball, -MotionSensor.getX() * density);
+        }
+        else
+        {
+            ball.Fall(2 * density, -MotionSensor.getX() * density, floor);
+            floor.Rotate(ball, -MotionSensor.getX() * 10);
+        }
+
+        //floors.get(0).Move(ball, -MotionSensor.getX() * density);
+        //floors.get(1).Rotate(ball, -MotionSensor.getX() * 10);
 
 
         if (ball.Fallen())

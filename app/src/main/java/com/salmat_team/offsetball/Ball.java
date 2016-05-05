@@ -91,7 +91,7 @@ public class Ball extends GameElement {
     }
 
 
-    public void Fall(double g, double side, List<Floor> floors) {
+    public void Fall(double g, double side, Floor f) {
 
         EllipseShape2D hcircle;
         Floor floor = null;
@@ -99,13 +99,13 @@ public class Ball extends GameElement {
         //Log.i("Ball","gBefore: "+gPower);
 
         //Földön állunk?
-        for (Floor f : floors) {
+        //for (Floor f : floors) {
             intersections = circle.intersections(f.getTopLine());
             if (!intersections.isEmpty()) {
                 floor = f;
-                break;
+                //break;
             }
-        }
+        //}
 
         if (floor == null) {
             //Ha nem földön állunk akkor esni kell
@@ -123,13 +123,13 @@ public class Ball extends GameElement {
             hcircle = circle.transform(AffineTransform2D.createTranslation((int) side, (int) newgPower));
 
 
-            for (Floor f : floors) {
+            //for (Floor f : floors) {
                 intersections = hcircle.intersections(f.getTopLine());
                 if (!intersections.isEmpty()) {
                     floor = f;
-                    break;
+                   // break;
                 }
-            }
+            //}
 
 
             if (floor == null) {
