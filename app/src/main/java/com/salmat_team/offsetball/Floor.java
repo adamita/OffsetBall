@@ -21,22 +21,38 @@ public class Floor extends GameElement{
 
     }
 
-
+    int constx=this.getX();
+    float lastm=0;
     public void Move(Ball ball, float m)
     {
         int x=this.getX();
+        float a=1f;
+        if(m>lastm+a)
+        {
+            if (screenWidth > this.getX() + this.getWidth())
+            {x+=25;lastm+=a;}
+        }
+        if(m<lastm-a)
+        {
+            if (0 < this.getX()) {
+                x -= 25;
+                lastm-=a;
+            }
+        }
+
+        /*int x=this.getX();
         int e=(this.getWidth()<<10);
         if(m>1)
         {
             if (screenWidth > this.getX() + this.getWidth())
-            {x=this.getX()+20;}
+            {x=this.getX()+25;}
         } else if (m < -1)
         {
 
             if (0 < this.getX()) {
-                x = this.getX() - 20;
+                x = this.getX() - 25;
             }
-        }
+        }*/
         /*if((this.getX()+e)<(w/2))
         {
             x=(int)(((w/2)-e)*((int)m));
@@ -50,8 +66,9 @@ public class Floor extends GameElement{
 //        if(shape.intersect(ball.getShape()))
 //            ball.MoveWith(getX()-x,0);
 
-        if (m != 0)
+        //if (m != 0)
             setPosition(x, this.getY());
+
 
     }
 

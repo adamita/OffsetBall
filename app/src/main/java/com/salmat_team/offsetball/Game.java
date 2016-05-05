@@ -42,11 +42,11 @@ public class Game {
         //floors.add(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 1, width, height));
         if(1==Integer.valueOf(view.getTag().toString()))
         {
-            floor=(new Floor(context, 0.5, 0.5, (int) (65 * density), (int) (15 * density), 1, width, height));
+            floor=(new Floor(context, 0.5, 0.9, (int) (65 * density), (int) (15 * density), 1, width, height));
         }
         else
         {
-            floor=(new Floor(context, 0.5, 0.8, (int) (200 * density), (int) (15 * density), 1, width, height));
+            floor=(new Floor(context, 0.5, 0.5, (int) (200 * density), (int) (15 * density), 1, width, height));
         }
 //        floors.get(1).setRotate(30);
 
