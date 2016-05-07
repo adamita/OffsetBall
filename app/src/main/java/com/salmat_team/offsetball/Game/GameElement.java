@@ -1,4 +1,4 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.Game;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

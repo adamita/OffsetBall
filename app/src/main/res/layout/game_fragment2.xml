@@ -4,7 +4,7 @@
     android:screenOrientation="portrait"
     android:tag="2"
     >
-    <com.salmat_team.offsetball.GameSpaceView
+    <com.salmat_team.offsetball.View.GameView.GameSpaceView
         android:id="@+id/gameSpaceView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

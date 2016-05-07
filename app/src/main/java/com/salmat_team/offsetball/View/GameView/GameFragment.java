@@ -1,11 +1,12 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.View.GameView;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.salmat_team.offsetball.R;
 
 /**
  * Created by adamita on 2016. 03. 20..

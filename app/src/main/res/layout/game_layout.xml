@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
     android:orientation="vertical"
-    tools:context="com.salmat_team.offsetball.GameActivity">
+    tools:context=".View.GameView.GameActivity">
     <!--<android.support.v7.widget.AppCompatTextView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/gamefragment1"
-        android:name="com.salmat_team.offsetball.GameFragment"
+        android:name="com.salmat_team.offsetball.View.GameView.GameFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
@@ -31,7 +31,7 @@
 
     <fragment
     android:id="@+id/gamefragment2"
-    android:name="com.salmat_team.offsetball.GameFragment2"
+    android:name="com.salmat_team.offsetball.View.GameView.GameFragment2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="2"

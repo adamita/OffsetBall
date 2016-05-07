@@ -9,4 +9,5 @@
     <string name="BackButton">VISSZA</string>
     <string name="BestText">A legjobb idő:</string>
     <string name="Congratulations">GRATULÁLOK!\nÚj rekord.</string>
+    <string name="GameOver">Vége a játéknak!</string>
 </resources>

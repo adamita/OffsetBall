@@ -1,24 +1,17 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.View.GameView;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.List;
+import com.salmat_team.offsetball.R;
+import com.salmat_team.offsetball.Common.MotionSensor;
 
 /**
  * Created by adamita on 2016. 03. 20..

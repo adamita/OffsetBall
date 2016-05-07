@@ -1,4 +1,4 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.Common;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;

@@ -9,4 +9,5 @@
     <string name="BackButton">BACK</string>
     <string name="BestText">The best time:</string>
     <string name="Congratulations">CONGRATULATIONS!\nNew record.</string>
+    <string name="GameOver">Game Over!</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.View.GameView;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.salmat_team.offsetball.Game.Game;
 
 /**
  * Created by adamita on 2016. 04. 27..

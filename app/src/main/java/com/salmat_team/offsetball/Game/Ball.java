@@ -1,14 +1,18 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.Game;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+
+import com.salmat_team.offsetball.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Random;
 
 import math.geom2d.AffineTransform2D;
 import math.geom2d.Point2D;
+import math.geom2d.conic.Circle2D;
 import math.geom2d.conic.EllipseShape2D;
 import math.geom2d.line.Line2D;
 
@@ -19,8 +23,8 @@ public class Ball extends GameElement {
 
     float fallTime;
 
-    double gPower;
-    double sPower;
+    private double gPower;
+    private double sPower;
     int maxGPower;
     Boolean bumping;
 
@@ -30,18 +34,13 @@ public class Ball extends GameElement {
         super(centerX, centerY, size, size, screenWidth, screenHeight);
         this.bumping = bumping;
         this.maxGPower = maxGPower;
-        gPower = 0;
-        sPower = 0;
+        setgPower(0);
+        setsPower(0);
         fallTime = 0;
         setBitmap(ContextCompat.getDrawable(context, R.drawable.ball));
 
     }
 
-//    public void Move(int x, int y) {
-////        circle = circle.transform(AffineTransform2D.createTranslation(x - getX(), y - getY()));
-//        setPosition(x, y);
-//
-//    }
 
     public void MoveWith(int x, int y) {
         if (screenWidth < getRight() + x)
@@ -90,11 +89,62 @@ public class Ball extends GameElement {
         return !circle.intersections(floor.getTopLine()).isEmpty();
     }
 
+    public void BuncingMove(Floor f)
+    {
+        /*
+        if(r.nextInt(101)<5)
+        {
+            if(r.nextInt(1)==0)
+                gPower++;
+            else
+                gPower--;
+        }
+
+        if(r.nextInt(101)<5)
+        {
+            if(r.nextInt(1)==0)
+                sPower++;
+            else
+                sPower--;
+        }*/
+
+        int x= (int) (getX()+ getsPower());
+        int y= (int) (getY()+ getgPower());
+
+        //Log.i("Ball","gPower: "+gPower);
+        //Log.i("Ball","sPower: "+sPower);
+        //Log.i("Ball","x,y: "+x+","+y);
+
+        if(x<0) {
+            setsPower(-sPower);
+            x=0;
+
+        }else if(x+getWidth()>screenWidth){
+            setsPower(-sPower);
+            x=screenWidth-getWidth();
+        }
+
+        if(y<0) {
+            setgPower(-gPower);
+            y=1;
+
+        }
+
+        setPosition(x,y);
+
+        if (isOnTop(f)) {
+            setOnFloorTop(f);
+            setgPower(-gPower);
+        }
+
+    }
+
+    EllipseShape2D hcircle=null;
+    Floor floor = null;
 
     public void Fall(double g, double side, Floor f) {
 
-        EllipseShape2D hcircle;
-        Floor floor = null;
+
 
         //Log.i("Ball","gBefore: "+gPower);
 
@@ -110,13 +160,14 @@ public class Ball extends GameElement {
         if (floor == null) {
             //Ha nem földön állunk akkor esni kell
 
-            gPower += sPower;
-            sPower = 0;
+            setgPower(getgPower() + getsPower());
+            setsPower(0);
+
 
             double newgPower;
 
-            if (g + gPower < maxGPower)
-                newgPower = gPower + g;
+            if (g + getgPower() < maxGPower)
+                newgPower = getgPower() + g;
             else
                 newgPower = maxGPower;
 
@@ -134,8 +185,8 @@ public class Ball extends GameElement {
 
             if (floor == null) {
 
-                gPower = newgPower;
-                MoveWith((int) side, (int) gPower);
+                setgPower(newgPower);
+                MoveWith((int) side, (int) getgPower());
 
             } else {
                 //Log.i("Ball","Ráesett");
@@ -144,9 +195,9 @@ public class Ball extends GameElement {
                 setOnFloorTop(floor);
 
                 if (!bumping) {
-                    gPower = 0;
+                    setgPower(0);
                 } else {
-                    gPower = (-gPower) + floor.getSubstance();
+                    setgPower((-getgPower()) + floor.getSubstance());
                 }
 
 
@@ -160,15 +211,15 @@ public class Ball extends GameElement {
 
             double pluspower = g * gradient;
             double realMaxG = maxGPower * gradient;
-            if (sPower + pluspower < realMaxG)
-                sPower += pluspower;
+            if (getsPower() + pluspower < realMaxG)
+                setsPower(getsPower() + pluspower);
             else
-                sPower = realMaxG;
+                setsPower(realMaxG);
 
-            if (gPower > 0)
-                gPower = 0;
+            if (getgPower() > 0)
+                setgPower(0);
 
-            MoveWith((int) sPower, (int) ((int) floor.getTopLine().distance(getCenterX() + sPower, getBottom()) + gPower));
+            MoveWith((int) getsPower(), (int) ((int) floor.getTopLine().distance(getCenterX() + getsPower(), getBottom()) + getgPower()));
         }
 
         //Log.i("Ball","gAfter: "+gPower);
@@ -178,6 +229,24 @@ public class Ball extends GameElement {
     public boolean Fallen()
     {
         return getY() >= screenHeight;
+    }
+
+    public double getgPower() {
+        return gPower;
+    }
+
+    public Ball setgPower(double gPower) {
+        this.gPower = gPower;
+        return this;
+    }
+
+    public double getsPower() {
+        return sPower;
+    }
+
+    public Ball setsPower(double sPower) {
+        this.sPower = sPower;
+        return this;
     }
 
 //    public boolean onFloor(Floor floor, boolean bump)

@@ -1,4 +1,4 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.View;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.salmat_team.offsetball.R;
 
 /**
  * Created by Peti on 2016.04.26..

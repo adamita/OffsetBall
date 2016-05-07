@@ -1,7 +1,9 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.Game;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+
+import com.salmat_team.offsetball.R;
 
 /**
  * Created by adamita on 2016. 04. 27..
@@ -29,8 +31,10 @@ public class Floor extends GameElement{
         float a=1f;
         if(m>lastm+a)
         {
-            if (screenWidth > this.getX() + this.getWidth())
-            {x+=25;lastm+=a;}
+            if (screenWidth > this.getX() + this.getWidth()) {
+                x += 25;
+                lastm+=a;
+            }
         }
         if(m<lastm-a)
         {

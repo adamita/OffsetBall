@@ -1,4 +1,4 @@
-package com.salmat_team.offsetball;
+package com.salmat_team.offsetball.Common;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-
-import java.util.ArrayList;
 
 /**
  * Created by Peti on 2016.04.27..
