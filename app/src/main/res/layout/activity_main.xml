@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
-        android:text="Exit"
+        android:text="@string/ExitButton"
         />
 
     <android.support.v7.widget.AppCompatButton
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/ExitButton"
         android:layout_centerHorizontal="true"
-        android:text="Options"
+        android:text="@string/OptionsButton"
         />
 
     <android.support.v7.widget.AppCompatButton
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/OptionsButton"
         android:layout_centerHorizontal="true"
-        android:text="Top"
+        android:text="@string/TopButton"
         />
 
     <android.support.v7.widget.AppCompatButton

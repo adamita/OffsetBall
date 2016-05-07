@@ -39,4 +39,9 @@ public class GameFragment extends Fragment {
             gameView.PauseGame();
         }
     }
+
+    void BackTime()
+    {
+
+    }
 }

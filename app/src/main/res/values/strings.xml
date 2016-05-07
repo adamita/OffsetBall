@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">OffsetBall</string>
     <string name="startGameButtonCaption">Start game</string>
+    <string name="TopButton">Top</string>
+    <string name="OptionsButton">Options</string>
+    <string name="ExitButton">Exit</string>
+    <string name="TextName">Your name:</string>
+    <string name="OkButton">OK</string>
+    <string name="BackButton">BACK</string>
+    <string name="BestText">The best time:</string>
+    <string name="Congratulations">CONGRATULATIONS!\nNew record.</string>
 </resources>

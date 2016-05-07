@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">OffsetBall</string>
+    <string name="startGameButtonCaption">Játék indítása</string>
+    <string name="TopButton">Ranglista</string>
+    <string name="OptionsButton">Beállítások</string>
+    <string name="ExitButton">Kilépés</string>
+    <string name="TextName">A neved:</string>
+    <string name="OkButton">OK</string>
+    <string name="BackButton">VISSZA</string>
+    <string name="BestText">A legjobb idő:</string>
+    <string name="Congratulations">GRATULÁLOK!\nÚj rekord.</string>
+</resources>

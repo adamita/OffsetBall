@@ -1,7 +1,11 @@
 package com.salmat_team.offsetball;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
 
@@ -104,7 +108,10 @@ public class Game {
                 }
             });
             view.postInvalidate();
-
+            //BackTime();
+            //view.findViewById(R.layout.game_layout).getContext();
+            GameActivity GA=(GameActivity) context;
+            GA.BackTime();
         }
 
     }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/topActivity"
+    >
+
+
+    <TextView
+        android:id="@+id/BestText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/BestText"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        />
+    <TextView
+        android:id="@+id/getName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Player's name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_above="@id/BestText"
+        />
+    <TextView
+        android:id="@+id/getBestTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="00:00:000"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/BestText"
+        android:gravity="center"
+        />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/BackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/BackButton"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorBlue"
+        />
+
+
+
+
+
+</RelativeLayout>

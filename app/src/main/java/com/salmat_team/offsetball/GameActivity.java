@@ -1,5 +1,7 @@
 package com.salmat_team.offsetball;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -23,11 +25,11 @@ import java.util.List;
  */
 public class GameActivity extends AppCompatActivity {
 
-    String fragm="";
+
     SensorManager manager;
     TextView timeTV;
     //String time="00:00:00";
-    long milli=0;
+    public long milli=0;
     long startTime=0L;
     int secund=0;
     int minute=0;
@@ -56,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
         manager= (SensorManager) getSystemService(SENSOR_SERVICE);
-        fragm = getIntent().getExtras().getString("fragment",null);
+
         timeTV=(TextView)findViewById(R.id.TimeTV);
         startTime=System.currentTimeMillis();
         //timeH.post(timeR);
@@ -84,6 +86,13 @@ public class GameActivity extends AppCompatActivity {
         manager.unregisterListener(listener);
     }
 
+    public void BackTime()
+    {
+        getIntent().putExtra("time",milli);
+        setResult(Activity.RESULT_OK,getIntent());
+        finish();
+    }
+
     private SensorEventListener listener = new SensorEventListener() {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
@@ -95,26 +104,7 @@ public class GameActivity extends AppCompatActivity {
     };
 
 
-    private void loadFragment(){
-        FragmentManager fm =getSupportFragmentManager();
-        FragmentTransaction ft =fm.beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-        switch (fragm) {
-            case "Game":
-                ft.addToBackStack(GameFragment.class.getName());
-                ft.add(R.id.game_fragment, new GameFragment());
-                ft.addToBackStack(GameFragment2.class.getName());
-                ft.add(R.id.game_fragment, new GameFragment2());
-                break;
-            case "Options":
-                ft.addToBackStack(OptionsFragment.class.getName());
-                ft.add(R.id.fragment_options, new OptionsFragment());
-                break;
-        }
-
-        ft.commit();
-    }
 
 
 
