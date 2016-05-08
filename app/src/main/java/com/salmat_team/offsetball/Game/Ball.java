@@ -209,19 +209,23 @@ public class Ball extends GameElement {
 
             float gradient = floor.getRotate() / 90;
 
-            double pluspower = g * gradient;
-            double realMaxG = maxGPower * gradient;
-            if (getsPower() + pluspower < realMaxG)
-                setsPower(getsPower() + pluspower);
-            else
+            double pluspower = g * (gradient/2);
+            double realMaxG = maxGPower * (gradient/2);
+            if (gradient<0 && sPower + pluspower > realMaxG)
                 setsPower(realMaxG);
+            else if (gradient>0 && sPower + pluspower < -realMaxG)
+                setsPower(-realMaxG);
+            else
+                setsPower(sPower + pluspower);
 
-            if (getgPower() > 0)
+
+            if (gPower > 0)
                 setgPower(0);
 
-            MoveWith((int) getsPower(), (int) ((int) floor.getTopLine().distance(getCenterX() + getsPower(), getBottom()) + getgPower()));
+            MoveWith((int) sPower, (int) ((int) floor.getTopLine().distance(getCenterX() + sPower, getBottom()) + gPower));
         }
 
+        Log.i("Ball","sPower: "+sPower);
         //Log.i("Ball","gAfter: "+gPower);
 
     }
